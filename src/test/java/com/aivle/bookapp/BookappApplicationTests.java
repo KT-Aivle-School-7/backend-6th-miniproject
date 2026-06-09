@@ -1,10 +1,10 @@
-package com.example.miniproject_5;
+package com.aivle.bookapp;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class Miniproject5ApplicationTests {
+class BookappApplicationTests {
 
 	@Test
 	void contextLoads() {

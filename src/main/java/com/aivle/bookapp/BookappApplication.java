@@ -1,13 +1,13 @@
-package com.example.miniproject_5;
+package com.aivle.bookapp;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class Miniproject5Application {
+public class BookappApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(Miniproject5Application.class, args);
+		SpringApplication.run(BookappApplication.class, args);
 	}
 
 }
