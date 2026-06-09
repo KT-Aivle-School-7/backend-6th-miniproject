@@ -5,7 +5,10 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.PrePersist;
+import jakarta.persistence.PreUpdate;
 import jakarta.persistence.Table;
+import java.time.LocalDateTime;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -25,17 +28,37 @@ public class Book {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@Column(nullable = false)
-	private String title;
+	@Column(name = "BOOK_MEMBER_ID")
+	private Long bookMemberId;
 
-	@Column(nullable = false)
-	private String author;
+	@Column(name = "BOOK_NAME", columnDefinition = "TEXT")
+	private String bookName;
 
-	private String isbn;
+	@Column(name = "BOOK_DESCRIPTION", columnDefinition = "TEXT")
+	private String bookDescription;
 
-	private Integer price;
+	@Column(name = "BOOK_COVERIMAGEURL", columnDefinition = "TEXT")
+	private String bookCoverImageUrl;
 
-	@Column(length = 1000)
-	private String description;
+	@Column(name = "BOOK_FAVORITE")
+	private Boolean bookFavorite;
+
+	@Column(name = "BOOK_CREATEDAT")
+	private LocalDateTime bookCreatedAt;
+
+	@Column(name = "BOOK_UPDATEDAT")
+	private LocalDateTime bookUpdatedAt;
+
+	@PrePersist
+	void onCreate() {
+		LocalDateTime now = LocalDateTime.now();
+		bookCreatedAt = now;
+		bookUpdatedAt = now;
+	}
+
+	@PreUpdate
+	void onUpdate() {
+		bookUpdatedAt = LocalDateTime.now();
+	}
 
 }
