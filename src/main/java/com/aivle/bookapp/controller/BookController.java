@@ -44,6 +44,16 @@ public class BookController {
 		return ResponseEntity.ok(updatedBook);
 	}
 
+	// 표지 이미지 URL 저장
+	@PatchMapping("/{id}/cover")
+	public ResponseEntity<Book> updateCover(
+			@PathVariable Long id,
+			@RequestBody Book request
+	) {
+		Book updatedBook = bookService.updateCover(id, request);
+		return ResponseEntity.ok(updatedBook);
+	}
+
 	// 삭제
 	@DeleteMapping("/{id}")
 	public ResponseEntity<Void> deleteBook(@PathVariable Long id) {

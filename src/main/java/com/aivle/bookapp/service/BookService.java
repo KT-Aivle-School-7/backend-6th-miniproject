@@ -74,6 +74,21 @@ public class BookService {
 		return book;
 	}
 
+	// 표지 이미지 URL 저장
+	@Transactional
+	public Book updateCover(Long id, Book request) {
+
+		Book book = findById(id);
+
+		if (request.getCoverImageUrl() == null || request.getCoverImageUrl().isBlank()) {
+			throw new IllegalArgumentException("표지 이미지 URL이 존재하지 않습니다.");
+		}
+
+		book.setCoverImageUrl(request.getCoverImageUrl());
+
+		return book;
+	}
+
 	// 삭제
 	@Transactional
 	public boolean delete(Long id) {
