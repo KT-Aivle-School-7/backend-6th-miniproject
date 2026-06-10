@@ -99,6 +99,7 @@ public class BookService {
 		}
 
 		book.setCoverImageUrl(request.getCoverImageUrl());
+		book.setCoverType("AI");
 
 		return book;
 	}

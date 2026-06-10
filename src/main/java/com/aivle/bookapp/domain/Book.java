@@ -46,6 +46,9 @@ public class Book {
 	@Column(name = "BOOK_UPDATEDAT")
 	private LocalDateTime updatedAt;
 
+	@Column(name = "COVER_TYPE")
+	private String coverType = "NONE";
+
 	@PrePersist
 	void onCreate() {
 		LocalDateTime now = LocalDateTime.now();
@@ -54,6 +57,10 @@ public class Book {
 
 		if (favorite == null) {
 			favorite = false;
+		}
+
+		if (coverType == null) {
+			coverType = coverImageUrl == null ? "NONE" : "EXTERNAL";
 		}
 	}
 
