@@ -34,6 +34,12 @@ public class BookService {
 	// 생성
 	@Transactional
 	public Book create(Book book) {
+
+		// 중복 방지
+		if (bookRepository.existsByTitle(book.getTitle())) {
+			throw new IllegalArgumentException("이미 등록된 도서입니다.");
+		}
+
 		Member member = memberRepository.findById("한봄")
 				.orElseGet(() -> {
 					Member newMember = new Member();
