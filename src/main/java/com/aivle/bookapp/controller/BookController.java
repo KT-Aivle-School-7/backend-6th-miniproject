@@ -31,7 +31,7 @@ public class BookController {
 
 	// 생성
 	@PostMapping
-	public ResponseEntity<Book> createook(
+	public ResponseEntity<Book> createBook(
 			@RequestParam String memberName,
 			@Valid @RequestBody Book book
 	) {
