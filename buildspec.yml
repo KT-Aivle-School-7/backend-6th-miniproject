@@ -7,22 +7,18 @@ phases:
 
   pre_build:
     commands:
-      - echo "=== Pre-build: 권한 설정 ==="
       - chmod +x ./gradlew
 
   build:
     commands:
-      - echo "=== Build: Spring Boot 빌드 시작 ==="
       - ./gradlew clean build
-      - echo "=== Build 완료: 결과물 확인 ==="
       - ls -la build/libs/
-      - JAR_FILE=$(ls build/libs/ | grep -v plain | grep '\.jar$' | head -1)
-      - echo "대상 JAR: $JAR_FILE"
+      - JAR_FILE=$(ls build/libs/ | grep -v plain | grep '.jar$' | head -1)
+      - echo "JAR file $JAR_FILE"
       - cp build/libs/$JAR_FILE app.jar
 
   post_build:
     commands:
-      - echo "=== Post-build: 배포 패키징 완료 ==="
       - ls -lh app.jar
 
 artifacts:
