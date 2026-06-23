@@ -1,0 +1,16 @@
+version: 0.2
+phases:
+  install:
+    runtime-versions:
+      java: corretto17
+  build:
+    commands:
+      - echo "Building Spring Boot application..."
+      - chmod +x ./gradlew
+      - ./gradlew clean build -x test
+artifacts:
+  files:
+    - appspec.yml
+    - scripts/**
+    - build/libs/*.jar
+  discard-paths: no
