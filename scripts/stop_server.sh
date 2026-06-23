@@ -1,7 +1,37 @@
 #!/bin/bash
-# 이 파일이 bash 스크립트임을 선언 (첫 줄에 반드시 있어야 함)
 
-pkill -f ".jar" || true
-# pkill -f ".jar"  → ".jar"라는 문자열이 포함된 프로세스를 찾아서 종료
-# || true          → 종료할 프로세스가 없어도 에러로 처리하지 말고 넘어가라
-#                    (처음 배포할 때는 실행 중인 서버가 없으므로 필수)
+echo "=== [stop_server.sh] 서버 종료 시작: $(date) ==="
+
+# PID 파일로 프로세스 종료 시도
+if [ -f /home/ec2-user/app/app.pid ]; then
+    PID=$(cat /home/ec2-user/app/app.pid)
+
+    if kill -0 $PID 2>/dev/null; then
+        echo "PID $PID 프로세스 종료 중..."
+        kill $PID
+        sleep 5
+
+        # 아직 살아있으면 강제 종료
+        if kill -0 $PID 2>/dev/null; then
+            echo "강제 종료(kill -9) 시도..."
+            kill -9 $PID
+        fi
+    else
+        echo "PID $PID 프로세스가 이미 종료되어 있습니다."
+    fi
+
+    rm -f /home/ec2-user/app/app.pid
+else
+    echo "PID 파일 없음. 포트 8080으로 프로세스 검색 중..."
+
+    PID=$(lsof -ti tcp:8080 2>/dev/null)
+    if [ -n "$PID" ]; then
+        echo "포트 8080 사용 중인 PID $PID 종료 중..."
+        kill $PID
+        sleep 3
+    else
+        echo "8080 포트를 사용 중인 프로세스 없음. 넘어갑니다."
+    fi
+fi
+
+echo "=== [stop_server.sh] 완료 ==="
