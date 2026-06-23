@@ -16,7 +16,6 @@ phases:
       - ./gradlew clean build
       - echo "=== Build 완료: 결과물 확인 ==="
       - ls -la build/libs/
-      # plain jar 제외, 실행 가능한 jar만 선택
       - JAR_FILE=$(ls build/libs/ | grep -v plain | grep '\.jar$' | head -1)
       - echo "대상 JAR: $JAR_FILE"
       - cp build/libs/$JAR_FILE app.jar
