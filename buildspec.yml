@@ -3,10 +3,12 @@ phases:
   install:
     runtime-versions:
       java: corretto17
+  pre_build:
+    commands:
+      - chmod +x ./gradlew
   build:
     commands:
       - echo "Building Spring Boot application..."
-      - chmod +x ./gradlew
       - ./gradlew clean build -x test
 artifacts:
   files:
