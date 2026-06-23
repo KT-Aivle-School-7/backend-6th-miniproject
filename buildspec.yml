@@ -10,9 +10,12 @@ phases:
     commands:
       - echo "Building Spring Boot application..."
       - ./gradlew clean build -x test
+      - echo "Build output:"
+      - ls -la build/libs/
+      - cp build/libs/$(ls build/libs/ | grep -v plain | head -1) app.jar
 artifacts:
   files:
     - appspec.yml
     - scripts/**
-    - build/libs/*.jar
+    - app.jar              # ← 경로 없이 루트에 jar를 올림
   discard-paths: no
