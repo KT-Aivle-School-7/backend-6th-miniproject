@@ -1,0 +1,29 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      java: corretto17
+
+  pre_build:
+    commands:
+      - chmod +x ./gradlew
+
+  build:
+    commands:
+      - ./gradlew clean build
+      - ls -la build/libs/
+      - JAR_FILE=$(ls build/libs/ | grep -v plain | grep '.jar$' | head -1)
+      - echo "JAR file $JAR_FILE"
+      - cp build/libs/$JAR_FILE app.jar
+
+  post_build:
+    commands:
+      - ls -lh app.jar
+
+artifacts:
+  files:
+    - app.jar
+    - appspec.yml
+    - scripts/**
+  discard-paths: no
