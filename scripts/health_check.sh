@@ -27,5 +27,5 @@ done
 
 echo "ERROR: 헬스 체크 실패 - 앱이 응답하지 않습니다."
 echo "최근 로그:"
-tail -20 /home/ec2-user/app/app.log
+tail -20 /home/ubuntu/app/app.log
 exit 1
