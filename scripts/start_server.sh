@@ -1,7 +1,7 @@
 #!/bin/bash
 
 APP_DIR=/home/ec2-user/app
-JAR_FILE=$APP_DIR/app.jar
+JAR_FILE=$(find $APP_DIR/build/libs -name "*-SNAPSHOT.jar" ! -name "*plain*" | head -1)
 LOG_FILE=$APP_DIR/app.log
 
 touch $LOG_FILE
