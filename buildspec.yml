@@ -14,16 +14,16 @@ phases:
       - ./gradlew clean build
       - ls -la build/libs/
       - JAR_FILE=$(ls build/libs/ | grep -v plain | grep '.jar$' | head -1)
-      - echo "JAR file $JAR_FILE"
-      - cp build/libs/$JAR_FILE app.jar
+      - echo "JAR file is $JAR_FILE"
+      - cp build/libs/$JAR_FILE ./app.jar
 
   post_build:
     commands:
-      - ls -lh app.jar
+      - ls -lh ./app.jar
 
 artifacts:
   files:
     - app.jar
     - appspec.yml
-    - scripts/**
-  discard-paths: no
+    - scripts/**/*
+  # discard-paths를 제거하거나 yes로 관리하는 것이 루트 파일 유기에 안전합니다.
